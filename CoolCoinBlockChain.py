@@ -7,21 +7,21 @@ class CoolCoinBlockChain:
      # constructor method
         self.chain = []
         self.current_data = []
-        self.nodes = set()
-        self.construct_genesis()
+        self.initialize_first_block()
 
 
-    def construct_genesis(self):
+    def initialize_first_block(self):
         # constructs the initial block
         self.construct_block(prev_hash=0)
 
 
-    def construct_block(self,prev_hash):
+    def construct_block(self,_prev_hash):
         # constructs a new block and adds it to the chain
         block = CoolCoinBlock(
             index=len(self.chain),
-            prev_hash=prev_hash,
-            data=self.current_data)
+            prev_hash=_prev_hash,
+            data=self.current_data
+            )
         self.current_data = []
         self.chain.append(block)
         return block
