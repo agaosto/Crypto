@@ -1,11 +1,13 @@
+
+from CommandLineHandler import CommmandLineHandler
 from CoolCoinBlockChain import CoolCoinBlockChain
 from CoolTransaction import CoolTransactionCMD
+
+
 def main() -> None:
-    blockchain = CoolCoinBlockChain()
-    print("Starting chain")
-    tr = CoolTransactionCMD
-    tr.perform_transaction("Adam", "Ewa",blockchain)
-    tr.perform_transaction("Ewa", "Adam",blockchain)
-    tr.show_all_transactions(blockchain)
+    print("Starting the chain")
+    cli = CommmandLineHandler()
+
+
 if __name__ == "__main__":
     main()
