@@ -9,6 +9,9 @@ class CoolCoinBlockChain:
         self.initialize_first_block()
 
     def initialize_first_block(self):
+        self.current_data.append({
+            'message': "Genesis block"
+        })
         self.construct_block(prev_hash=0)
 
     def construct_block(self, prev_hash):
