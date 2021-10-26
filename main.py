@@ -1,4 +1,3 @@
-
 from CommandLineHandler import CommmandLineHandler
 from CoolCoinBlockChain import CoolCoinBlockChain
 from CoolTransaction import CoolTransactionCMD

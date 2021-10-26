@@ -1,4 +1,3 @@
-
 from CoolCoinBlockChain import CoolCoinBlockChain
 from CoolTransaction import CoolTransactionCMD
 
@@ -9,6 +8,7 @@ class CommmandLineHandler:
         self.programLoop()
 
     def printMenu(self):
+        print("[0] Exit")
         print("[1] Add transaction")
         print("[2] Show all transactions")
 

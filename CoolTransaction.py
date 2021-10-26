@@ -15,7 +15,7 @@ class CoolTransactionCMD(CoolTransactionInterface):
         if(CoolCoinBlockChain.check_validity(block, previous_block)):
             print("Transaction is valid, saved!")
         else:
-            print("Invalid tranaaction, rollback?")
+            print("Invalid transaction!")
         pass
 
     def show_last_transaction() -> None:
