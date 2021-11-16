@@ -1,5 +1,4 @@
 from CoolTransactionInterface import CoolTransactionInterface
-from CoolCoinBlockChain import CoolCoinBlockChain
 
 
 class CoolTransactionCMD(CoolTransactionInterface):

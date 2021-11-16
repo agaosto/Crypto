@@ -1,4 +1,3 @@
-from CoolCoinBlockChain import CoolCoinBlockChain
 from CoolTransaction import CoolTransactionCMD
 
 
