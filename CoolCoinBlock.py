@@ -6,7 +6,7 @@ class CoolCoinBlock:
     def __init__(self, index, prev_hash, data):
         self.index = index
         self.prev_hash = prev_hash
-        self.data = data
+        self.data = data #json
 
     def calculate_hash(self):
         block_of_string = "{}{}{}".format(
