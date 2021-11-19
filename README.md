@@ -1,5 +1,7 @@
 # Crypto - CoolCoin
 > Project made by Radosław Strublewski & Agata Ostolska
+## 2nd sprint
+
 ## 1st sprint
 The project allows the user to create a simple blockchain. After starting the program, the user interface can be seen in the terminal. The user can add another block / transaction (at this stage it is assumed that one block contains only one transaction) or display all blocks in the blockchain. Press [0] to exit.
 
