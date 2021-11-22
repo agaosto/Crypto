@@ -1,18 +1,19 @@
 from array import array
 from CoolCoinBlock import CoolCoinBlock
 from Coin import Coin
-import Users
+from TransactionData import TransactionData
+import Users as us
 import json
 
 
 class CoinBlockChainManager:
-    hash = 0
 
     def __init__(self):
         self.chain = []
         self.current_data = []
         self.coin_table = []
         self.genesis_data = []
+        self.head_hash = 0
 
     def create_coin_table(self, number_of_coins):
         for i in range(0, number_of_coins):
@@ -22,28 +23,27 @@ class CoinBlockChainManager:
             self.coin_table.append(coin)
         pass
 
-    def give_coins(self, user: Users.User, number_of_coins):
+    def give_coins(self, user: us.User, number_of_coins):
         temp_coin_id_table = []
         for i in range(0, number_of_coins):
-            temp_coin_id_table.append(self.coin_table.pop(i).id)
-        message = f"CREATE {temp_coin_id_table} TO {user.name}"
+            temp_coin_id_table.append(self.coin_table.pop(0).id)
+        message = "{\"create\": " +json.dumps(temp_coin_id_table)+", \"recipent\": \"" +user.name+"\"}"
         self.genesis_data.append(message)
 
     def initialize_first_block(self):
-        self.current_data.append(
-            json.dumps(self.genesis_data)
-        )
-        self.construct_block(prev_hash=0)
-        print(self.chain)
+        for elem in self.genesis_data:
+            self.current_data.append(elem)
+        self.construct_block(self.head_hash)
 
-    def construct_block(self, prev_hash):
+    def construct_block(self, hash):
         block = CoolCoinBlock(
             index=len(self.chain),
-            prev_hash=prev_hash,
-            data=self.current_data
+            data=self.current_data,
+            prev_hash=hash
         )
         self.current_data = []
         self.chain.append(block)
+        self.head_hash = block.calculate_hash()
         return block
 
     @staticmethod
@@ -63,24 +63,18 @@ class CoinBlockChainManager:
     def get_previous_block(self):
         return self.chain[-1]
 
-    def add_new_data(self, sender, recipient, coin_id):
+    def add_new_data(self, transaction_data: str):
         # adds a new transaction to the data of the transactions
-        self.current_data.append({
-            f"{sender} PAYS {coin_id} TO {recipient}"
-        })
+        self.current_data.append(transaction_data)
+            #f"{transaction_data.sender} PAYS {transaction_data.coin} TO {transaction_data.recipent}"
         return True
 
-    def perform_transaction(self, sender: str, recipent: str, coin_id: array) -> None:
+    def perform_transaction(self, transaction_data: TransactionData) -> None:
         previous_block = self.get_previous_block()
-        self.add_new_data(
-            sender=sender,
-            recipient=recipent,
-            coin_id=coin_id
-
-        )
+        self.add_new_data(transaction_data.get_json_of_transaction())
         last_hash = previous_block.calculate_hash()
         # aktualizacja hasha userow
-        Users.Users.update_hash(last_hash)
+        us.Users.update_hash(last_hash)
         block = self.construct_block(last_hash)
         #print("Checking if transaction is valid...")
        # if(CoolCoinBlockChain.check_validity(block, previous_block)):
@@ -88,3 +82,13 @@ class CoinBlockChainManager:
         # else:
         #  print("Invalid transaction!")
         return True
+    def show_chain(self)->None:
+        print(self.chain)
+        data = self.chain[0]
+        test = data.get_data()
+        print(test[0])
+        test1 = json.loads(test[0])
+        print(test1["create"]) #[0,1] mamy coiny
+  
+        pass
+   
