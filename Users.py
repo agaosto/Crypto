@@ -1,7 +1,7 @@
 
 import CoinBlockChainManager
-
-
+import TransactionData as ts
+import json
 class Users:
     users = []
 
@@ -30,18 +30,22 @@ class User:
         self.user_hash = 0
         pass
 
-    def validate_blockchain():
-        pass
-
-    def checkout():
-        pass
-
-    def request_transaction(self, recipent: str, coin_id: int, blockchain: CoinBlockChainManager):
-        #blockchain = CoinBlockChainManager()
-        is_done_flag = blockchain.perform_transaction(
-            self.name, recipent, coin_id)
-        if(is_done_flag):
+    def validate_blockchain(self, blockchain: CoinBlockChainManager):
+        if(blockchain.validate_blockchain()==self.user_hash):
             print("OK")
         else:
-            print("NIEOK")
+            print("WRONG")
         pass
+
+    def checkout(self, blockchain: CoinBlockChainManager):
+
+        print(self.name+" your coins: "+str(blockchain.get_available_coins(self.name)))
+        pass
+    def get_user_hash(self):
+        return self.user_hash
+    def request_transaction(self, recipient, coin, blockchain: CoinBlockChainManager):
+        transaction = ts.TransactionData(self, recipient, coin)
+        blockchain.perform_transaction(transaction)
+        pass
+    def encode(self):
+        return self.__dict__

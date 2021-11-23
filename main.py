@@ -1,6 +1,6 @@
 from CoinBlockChainManager import CoinBlockChainManager
 from TransactionData import TransactionData
-from Users import Users
+from Users import Users, User
 
 
 
@@ -19,11 +19,17 @@ def main() -> None:
     blockchain.give_coins(john, 2)
     blockchain.give_coins(bob, 2)
     blockchain.initialize_first_block()
+    john.checkout(blockchain)
+    print(blockchain.head_hash)
+    print(john.user_hash)
+    john.request_transaction(bob.name, 1, blockchain)
+    john.checkout(blockchain)
+    john.validate_blockchain(blockchain)
     #blockchain.perform_transaction
     #wybierz usera z tablicy
     #john.request_transaction("bob", 1, blockchain)
-    transaction = TransactionData("john", "bob", 3)
-    blockchain.perform_transaction(transaction)
+    #transaction = TransactionData("john", "bob", 3)
+    #blockchain.perform_transaction(transaction)
     blockchain.show_chain()
    
 
