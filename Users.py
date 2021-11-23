@@ -43,7 +43,7 @@ class User:
         pass
     def get_user_hash(self):
         return self.user_hash
-    def request_transaction(self, recipient, coin, blockchain: CoinBlockChainManager):
+    def request_transaction(self, recipient, coin:list, blockchain: CoinBlockChainManager):
         transaction = ts.TransactionData(self, recipient, coin)
         blockchain.perform_transaction(transaction)
         pass

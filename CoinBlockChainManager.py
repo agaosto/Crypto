@@ -110,18 +110,21 @@ class CoinBlockChainManager(metaclass=ConblockChainManagerSingletonMeta):
         user_coins = self.get_user_coins(user)
         for i in range(1, self.get_length_of_chain()):
             transaction = json.loads(self.chain[i].get_data()[0])
-            print(transaction["coin"])
+            #print(transaction)
+            #print(i)
             sender = transaction["sender"]
             coin_id = transaction["coin"]
-            if(transaction["sender"]["name"]==user and user_coins.count(coin_id)>0):
-                print("a")
-                user_coins.remove(coin_id)
-            #elif(user_coins.count(coin_id)==0):
-                #return False
+            for coin in coin_id:
+                print(coin)
+                if(transaction["sender"]["name"]==user and user_coins.count(coin)>0):
+                    user_coins.remove(coin)
+                elif(user_coins.count(coin)==0):
+                    return []
         return user_coins
     def validate_coins(self, transaction_data:TransactionData):
         available_coins = self.get_available_coins(transaction_data.sender.name)
-        if(available_coins.count(transaction_data.coin)==0):
+        print("available"+str(available_coins))
+        if(available_coins.__len__()==0):
             print("error: Trying to use coin you don't have")
             return False
         else:

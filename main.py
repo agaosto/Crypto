@@ -19,12 +19,15 @@ def main() -> None:
     blockchain.give_coins(john, 2)
     blockchain.give_coins(bob, 2)
     blockchain.initialize_first_block()
+    #john.checkout(blockchain)
+    list=[0]
+    list1=[1]
+    john.request_transaction(bob.name, list, blockchain)
     john.checkout(blockchain)
-    print(blockchain.head_hash)
-    print(john.user_hash)
-    john.request_transaction(bob.name, 1, blockchain)
-    john.checkout(blockchain)
-    john.validate_blockchain(blockchain)
+    john.request_transaction(bob.name, list1, blockchain)
+    #john.checkout(blockchain)
+    #john.checkout(blockchain)
+    #john.validate_blockchain(blockchain)
     #blockchain.perform_transaction
     #wybierz usera z tablicy
     #john.request_transaction("bob", 1, blockchain)
