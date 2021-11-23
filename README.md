@@ -1,7 +1,9 @@
 # Crypto - CoolCoin
 > Project made by Radosław Strublewski & Agata Ostolska
 ## 2nd sprint
+The project has been improved. main.py cointains use cases that show all the features. Users, User and Chain Manager classes has been added. Users are created and coins are distributed between them initially. Transactions are stored in JSON format.
 
+The whole blockchain is displayed at the end.
 ## 1st sprint
 The project allows the user to create a simple blockchain. After starting the program, the user interface can be seen in the terminal. The user can add another block / transaction (at this stage it is assumed that one block contains only one transaction) or display all blocks in the blockchain. Press [0] to exit.
 

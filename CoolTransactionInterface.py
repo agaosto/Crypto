@@ -1,5 +1,5 @@
 class CoolTransactionInterface:
-    def perform_transaction(sender: str, recipent: str) -> None:
+    def perform_transaction(sender: str, recipient: str) -> None:
         pass
 
     def show_last_transaction() -> None:

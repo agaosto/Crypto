@@ -1,11 +1,10 @@
-import array
 import json
-
 from Users import User
 
 
 class TransactionData:
-    def __init__(self, sender:User, recipient:str, coin: list) -> None:
+
+    def __init__(self, sender: User, recipient: str, coin: list) -> None:
         self.sender = sender
         self.recipient = recipient
         self.coin = coin
