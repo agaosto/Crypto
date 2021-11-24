@@ -1,9 +1,26 @@
 # Crypto - CoolCoin
 > Project made by Radosław Strublewski & Agata Ostolska
 ## 2nd sprint
-The project has been improved. main.py cointains use cases that show all the features. Users, User and Chain Manager classes has been added. Users are created and coins are distributed between them initially. Transactions are stored in JSON format.
+The project has been improved. main.py cointains use cases that show all the new features. Users, User and Chain Manager classes have been added. Users are created and coins are distributed between them initially. Coin distribution data is stored in the initial block.
+
+![image](https://user-images.githubusercontent.com/61022689/143148094-c73e100f-c3e3-4f5e-aa46-75f76821fff1.png)
+
+Transactions are stored in JSON format. Use cases 1 and 2 show transactions with single and multiple coins. 
+
+![image](https://user-images.githubusercontent.com/61022689/143148148-6bc83dee-c26a-400d-8c96-ddc90204fea3.png)
+
+Cases 3 and 4 show double-spending protection. If a user tries to spend a coin that they don't have, an error is displayed and the transaction is not validated.
+
+![image](https://user-images.githubusercontent.com/61022689/143148191-4224a85f-f4dd-4f26-837b-18f0f2d87868.png)
+
+Users can validate the blockchain. If the attacker calls the method that adds a new block to the blockchain, all the users will know that the blockchain is not valid.
+
+![image](https://user-images.githubusercontent.com/61022689/143148326-915e2eb4-721f-4014-908e-92e9d8863643.png)
 
 The whole blockchain is displayed at the end.
+
+![image](https://user-images.githubusercontent.com/61022689/143148484-eb91e100-a933-430b-9afd-88e48e98e2f2.png)
+
 ## 1st sprint
 The project allows the user to create a simple blockchain. After starting the program, the user interface can be seen in the terminal. The user can add another block / transaction (at this stage it is assumed that one block contains only one transaction) or display all blocks in the blockchain. Press [0] to exit.
 
