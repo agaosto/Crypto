@@ -1,6 +1,10 @@
+import base64
+from rsa.key import PublicKey
 from CoinBlockChainManager import CoinBlockChainManager
 from Users import Users
-
+import json
+from RsaOperations import RsaOperations
+import rsa
 
 def main() -> None:
     # creating users
@@ -22,7 +26,7 @@ def main() -> None:
     blockchain.give_coins(bob, 2)
     blockchain.give_coins(ann, 3)
 
-    blockchain.initialize_first_block()
+    blockchain.initialize_genesis_block()
 
     print("Ditributed coins:")
     john.checkout(blockchain)
@@ -70,12 +74,14 @@ def main() -> None:
     bob.validate_blockchain(blockchain)
     ann.validate_blockchain(blockchain)
     john.validate_blockchain(blockchain)
-    print("")
+    bob.validate_coins(blockchain)
+    ann.validate_coins(blockchain)
+    john.validate_coins(blockchain)
+
 
     # print whole blockchain
     print("Blockchain:")
     blockchain.show_chain()
-
 
 if __name__ == "__main__":
     main()

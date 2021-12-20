@@ -8,7 +8,6 @@ class CoolCoinBlock:
         self.index = index
         self.prev_hash = prev_hash
         self.data = data
-
     def get_data(self):
         return self.data
 
