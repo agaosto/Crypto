@@ -142,7 +142,7 @@ class CoinBlockChainManager(metaclass=ConblockChainManagerSingletonMeta):
             transaction_data.sender)
         for coin in transaction_data.coin:
             if(available_coins.count(coin) == 0):
-                print("Error: " + transaction_data.sender +
+                print("Error: " + us.Users.get_user_by_public_key(transaction_data.sender).name +
                       ", you're trying to use coin(s) you don't have")
                 return False
         else:
@@ -161,8 +161,8 @@ class CoinBlockChainManager(metaclass=ConblockChainManagerSingletonMeta):
 
     def validate_transaction(self, transaction_data: TransactionData) -> bool:
         if(self.validate_coins(transaction_data) and self.validate_hash(transaction_data) and self.validate_signature(transaction_data)):
-            print(transaction_data.sender+ "'s transaction successful")
+            print(us.Users.get_user_by_public_key(transaction_data.sender).name+ "'s transaction successful")
             return True
         else:
-            print(transaction_data.sender + "'s transaction is invalid!")
+            print(us.Users.get_user_by_public_key(transaction_data.sender).name + "'s transaction is invalid!")
             return False
