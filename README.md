@@ -1,5 +1,21 @@
 # Crypto - CoolCoin
 > Project made by Radosław Strublewski & Agata Ostolska
+## 3rd sprint
+Users (and the Chain Manager) are now represented by their digital identity (public and private key). 512-bit keys are generated with Python-RSA package. Creating coins in genesis block is signed by the Chain Manager. Coins can be validated:
+
+![image](https://user-images.githubusercontent.com/61022689/146995197-f3cd508b-9e5e-4eb5-9bc7-1a9c2e616c9c.png)
+
+A new field in JSON transaction has been added. Transaction data now consists of:
+- sender (public key)
+- coins
+- signature
+
+![image](https://user-images.githubusercontent.com/61022689/146995792-a229ebf0-2b82-408d-9fcd-c27238263226.png)
+
+Signature in JSON is encoded in Base64.
+
+Use cases from the 2nd sprint were used in main.py.
+
 ## 2nd sprint
 The project has been improved. main.py cointains use cases that show all the new features. Users, User and Chain Manager classes have been added. Users are created and coins are distributed between them initially. Coin distribution data is stored in the initial block.
 
