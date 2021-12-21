@@ -1,6 +1,5 @@
 import hashlib
 
-from rsa.pkcs1 import sign
 from CoolCoinBlock import CoolCoinBlock
 from Coin import Coin
 from TransactionData import TransactionData
