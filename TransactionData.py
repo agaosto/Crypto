@@ -9,7 +9,7 @@ class TransactionData:
         self.sender = sender.public_key
         self.recipient = recipient
         self.coin = coin
-        self.sign = (RsaOperations.generate_sign("test", RsaOperations.load_private_key(sender.private_key))).decode('ascii')
+        self.signed = (RsaOperations.generate_sign(str(sender.public_key)+recipient+str(coin), RsaOperations.load_private_key(sender.private_key))).decode('ascii')
         pass
 
     def get_json_of_transaction(self) -> str:

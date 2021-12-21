@@ -156,8 +156,8 @@ class CoinBlockChainManager(metaclass=ConblockChainManagerSingletonMeta):
             return True
     def validate_signature(self, transaction_data: TransactionData)->bool:
         pub = transaction_data.sender
-        signature = transaction_data.sign
-        return RsaOperations.verify_signature("test", signature, RsaOperations.load_public_key(pub))
+        signature = transaction_data.signed
+        return RsaOperations.verify_signature(pub+transaction_data.recipient+str(transaction_data.coin), signature, RsaOperations.load_public_key(pub))
 
     def validate_transaction(self, transaction_data: TransactionData) -> bool:
         if(self.validate_coins(transaction_data) and self.validate_hash(transaction_data) and self.validate_signature(transaction_data)):

@@ -38,18 +38,18 @@ def main() -> None:
     print("Case 1:")
     john.checkout(blockchain)
     bob.checkout(blockchain)
-    john.request_transaction(bob.name, [0], blockchain)
-    john.request_transaction(bob.name, [1], blockchain)
+    john.request_transaction(bob.public_key, [0], blockchain)
+    john.request_transaction(bob.public_key, [1], blockchain)
     john.checkout(blockchain)
     bob.checkout(blockchain)
-    bob.request_transaction(ann.name, [1], blockchain)
+    bob.request_transaction(ann.public_key, [1], blockchain)
     bob.checkout(blockchain)
     ann.checkout(blockchain)
     print("")
 
     # case 2 - multiple coins transactions
     print("Case 2:")
-    bob.request_transaction(john.name, [2, 3], blockchain)
+    bob.request_transaction(john.public_key, [2, 3], blockchain)
     john.checkout(blockchain)
     bob.checkout(blockchain)
     print("")
@@ -57,16 +57,16 @@ def main() -> None:
     # case 3 - double spending in single coin transactions
     print("Case 3:")
     ann.checkout(blockchain)
-    ann.request_transaction(john.name, [1], blockchain)
+    ann.request_transaction(john.public_key, [1], blockchain)
     ann.checkout(blockchain)
-    ann.request_transaction(john.name, [1], blockchain)
+    ann.request_transaction(john.public_key, [1], blockchain)
     print("")
 
     # case 4 - double spending in multiple coins transactions
     print("Case 4:")
-    ann.request_transaction(john.name, [4, 5], blockchain)
+    ann.request_transaction(john.public_key, [4, 5], blockchain)
     ann.checkout(blockchain)
-    ann.request_transaction(john.name, [4, 6], blockchain)
+    ann.request_transaction(john.public_key, [4, 6], blockchain)
     print("")
 
     # blockchain validation
