@@ -1,5 +1,4 @@
 import hashlib
-
 from CoolCoinBlock import CoolCoinBlock
 from Coin import Coin
 from TransactionData import TransactionData
@@ -33,7 +32,7 @@ class CoinBlockChainManager(metaclass=ConblockChainManagerSingletonMeta):
     def create_coin_table(self, number_of_coins) -> None:
         for i in range(0, number_of_coins):
             coin = Coin(
-                id = i
+                id=i
             )
             self.coin_table.append(coin)
         pass
@@ -42,22 +41,25 @@ class CoinBlockChainManager(metaclass=ConblockChainManagerSingletonMeta):
         temp_coin_id_table = []
         for i in range(0, number_of_coins):
             temp_coin_id_table.append(self.coin_table.pop(0).id)
-        message = "{\"create\": " +json.dumps(temp_coin_id_table)+", \"recipent\": " +json.dumps(user.public_key)
-        signature = ", \"signed\": "+json.dumps(RsaOperations.generate_sign(json.dumps(str(temp_coin_id_table)+user.public_key), RsaOperations.load_private_key(self.private_key)).decode('ascii'))+"}"
+        message = "{\"create\": " + json.dumps(
+            temp_coin_id_table)+", \"recipent\": " + json.dumps(user.public_key)
+        signature = ", \"signed\": "+json.dumps(RsaOperations.generate_sign(json.dumps(str(
+            temp_coin_id_table)+user.public_key), RsaOperations.load_private_key(self.private_key)).decode('ascii'))+"}"
         self.genesis_data.append(message+signature)
 
     def validate_blockchain(self) -> str:
         return self.calculate_hash(self.get_previous_block())
 
     def calculate_hash(self, block: CoolCoinBlock) -> str:
-        block_of_string = json.dumps(block.__dict__, sort_keys = True)
+        block_of_string = json.dumps(block.__dict__, sort_keys=True)
         result = hashlib.sha256(block_of_string.encode()).hexdigest()
         return result
+
     def validate_coins_signature(self, user: us.User) -> bool:
-            coins = self.get_user_coins(user.public_key)
-            message = json.dumps(str(coins)+user.public_key)
-            return RsaOperations.verify_signature(message, self.get_genesis_signature(user.public_key), RsaOperations.load_public_key(self.public_key))
-        
+        coins = self.get_user_coins(user.public_key)
+        message = json.dumps(str(coins)+user.public_key)
+        return RsaOperations.verify_signature(message, self.get_genesis_signature(user.public_key), RsaOperations.load_public_key(self.public_key))
+
     def initialize_genesis_block(self) -> None:
         for elem in self.genesis_data:
             self.current_data.append(elem)
@@ -66,9 +68,9 @@ class CoinBlockChainManager(metaclass=ConblockChainManagerSingletonMeta):
 
     def construct_block(self, hash) -> CoolCoinBlock:
         block = CoolCoinBlock(
-            index = len(self.chain),
-            data = self.current_data,
-            prev_hash = hash,
+            index=len(self.chain),
+            data=self.current_data,
+            prev_hash=hash,
 
         )
         self.current_data = []
@@ -97,6 +99,7 @@ class CoinBlockChainManager(metaclass=ConblockChainManagerSingletonMeta):
     def show_chain(self) -> None:
         print(self.chain)
         pass
+
     def get_genesis_signature(self, user: us.User):
         data = self.get_genesis_block().get_data()
         for elem_json in data:
@@ -105,6 +108,7 @@ class CoinBlockChainManager(metaclass=ConblockChainManagerSingletonMeta):
                 return elem["signed"]
         print("Error: No such user")
         pass
+
     def get_user_coins(self, user) -> list:
         data = self.get_genesis_block().get_data()
         for elem_json in data:
@@ -153,15 +157,18 @@ class CoinBlockChainManager(metaclass=ConblockChainManagerSingletonMeta):
             return False
         else:
             return True
-    def validate_signature(self, transaction_data: TransactionData)->bool:
+
+    def validate_signature(self, transaction_data: TransactionData) -> bool:
         pub = transaction_data.sender
         signature = transaction_data.signed
         return RsaOperations.verify_signature(pub+transaction_data.recipient+str(transaction_data.coin), signature, RsaOperations.load_public_key(pub))
 
     def validate_transaction(self, transaction_data: TransactionData) -> bool:
         if(self.validate_coins(transaction_data) and self.validate_hash(transaction_data) and self.validate_signature(transaction_data)):
-            print(us.Users.get_user_by_public_key(transaction_data.sender).name+ "'s transaction successful")
+            print(us.Users.get_user_by_public_key(
+                transaction_data.sender).name + "'s transaction successful")
             return True
         else:
-            print(us.Users.get_user_by_public_key(transaction_data.sender).name + "'s transaction is invalid!")
+            print(us.Users.get_user_by_public_key(
+                transaction_data.sender).name + "'s transaction is invalid!")
             return False

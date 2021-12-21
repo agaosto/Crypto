@@ -2,12 +2,12 @@ from CoolTransactionInterface import CoolTransactionInterface
 
 
 class CoolTransactionCMD(CoolTransactionInterface):
-    
+
     def perform_transaction(sender: str, recipient: str, block_chain: CoolCoinBlockChain) -> None:
         previous_block = block_chain.get_previous_block()
         block_chain.add_new_data(
-            sender = sender,
-            recipient = recipient,
+            sender=sender,
+            recipient=recipient,
         )
         last_hash = previous_block.calculate_hash()
         block = block_chain.construct_block(last_hash)
