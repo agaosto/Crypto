@@ -7,11 +7,17 @@ Each transaction is transmitted to all of the other nodes with 90% probability.
 Proof of work is running in parallel. The first miner that finds the hash with specified number of zeros, proposes the new block to others. If all nodes reach a consensus, the block is added to the blockchain and the miner gets a coin in reward.
 
 Bob, Ann and Sam have their coins:
+
 ![image](https://user-images.githubusercontent.com/61022689/151076110-1d88c030-78e4-445c-9de8-3323deb6f255.png)
+
 When Sam pays 1 coin to Ann, and Ann pays 1 coin to Bob, and all the nodes reach consensus, we can see that Sam got a reward coin.
+
 ![image](https://user-images.githubusercontent.com/61022689/151076691-89a0f460-75a4-4173-a20a-c9c2d7a9101c.png)
+
 When validation fails, there is a message:
+
 ![image](https://user-images.githubusercontent.com/61022689/151076720-7bfc905f-0df2-4348-8294-7dd350fec356.png)
+
 
 ## 3rd sprint
 Users (and the Chain Manager) are now represented by their digital identity (public and private key). 512-bit keys are generated with Python-RSA package. Creating coins in genesis block is signed by the Chain Manager. Coins can be validated:
